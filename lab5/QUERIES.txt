@@ -1,0 +1,75 @@
+Q1
+
+
+SELECT 
+    s1.StateName AS State,
+    t1.MonthName AS Month,
+    t1.Year AS CurrentYear,
+    SUM(sales1.SalesAmount) AS CurrentYearSales,
+    SUM(sales2.SalesAmount) AS PreviousYearSales,
+    (SUM(sales1.SalesAmount) - SUM(sales2.SalesAmount)) AS SalesDifference
+FROM 
+    Sales AS sales1
+JOIN 
+    Customer AS cust ON sales1.CustomerKey = cust.CustomerKey
+JOIN 
+    City AS city ON cust.CityKey = city.CityKey
+JOIN 
+    State AS s1 ON city.StateKey = s1.StateKey
+JOIN 
+    Time AS t1 ON sales1.OrderDateKey = t1.TimeKey
+LEFT JOIN 
+    Sales AS sales2 ON sales1.CustomerKey = sales2.CustomerKey
+LEFT JOIN 
+    Time AS t2 ON sales2.OrderDateKey = t2.TimeKey
+    AND MONTH(t1.Date) = MONTH(t2.Date) AND (t1.Year - 1) = t2.Year
+GROUP BY 
+    s1.StateName, t1.MonthName, t1.Year
+ORDER BY 
+    s1.StateName, t1.Year, t1.MonthName;
+
+
+
+
+Q2
+
+SELECT 
+    p.ProductName,
+    t1.Year,
+    t1.MonthName AS CurrentMonth,
+    SUM(sales1.SalesAmount) AS CurrentMonthSales,
+    SUM(sales2.SalesAmount) AS PreviousMonthSales,
+    ((SUM(sales1.SalesAmount) - SUM(sales2.SalesAmount)) / NULLIF(SUM(sales2.SalesAmount), 0)) * 100 AS SalesGrowthPercentage
+FROM 
+    Sales AS sales1
+JOIN 
+    Product AS p ON sales1.ProductKey = p.ProductKey
+JOIN 
+    Time AS t1 ON sales1.OrderDateKey = t1.TimeKey
+LEFT JOIN 
+    Sales AS sales2 ON sales1.ProductKey = sales2.ProductKey
+LEFT JOIN 
+    Time AS t2 ON sales2.OrderDateKey = t2.TimeKey
+    AND MONTH(t1.Date) = MONTH(t2.Date) + 1 AND t1.Year = t2.Year
+GROUP BY 
+    p.ProductName, t1.Year, t1.MonthName
+ORDER BY 
+    p.ProductName, t1.Year, t1.MonthName;
+
+
+
+Q3
+
+SELECT 
+    e.EmployeeKey,
+    e.FirstName + ' ' + e.LastName AS EmployeeName,
+    SUM(sales.SalesAmount) AS TotalSales
+FROM 
+    Sales AS sales
+JOIN 
+    Employee AS e ON sales.EmployeeKey = e.EmployeeKey
+GROUP BY 
+    e.EmployeeKey, e.FirstName, e.LastName
+ORDER BY 
+    TotalSales DESC
+OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY;

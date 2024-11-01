@@ -1,0 +1,102 @@
+INSERT INTO Continent (ContinentKey, ContinentName) VALUES
+(1, 'Africa'),
+(2, 'Asia'),
+(3, 'Europe'),
+(4, 'North America'),
+(5, 'South America');
+
+
+
+INSERT INTO Country (CountryKey, CountryName, CountryCode, CountryCapital, Population, Subdivision, ContinentKey) VALUES
+(1, 'United States', 'US', 'Washington D.C.', 331000000, 'Federal', 4),
+(2, 'Canada', 'CA', 'Ottawa', 38000000, 'Province', 4),
+(3, 'Brazil', 'BR', 'Brasília', 212600000, 'Federal', 5),
+(4, 'Germany', 'DE', 'Berlin', 83000000, 'State', 3),
+(5, 'Japan', 'JP', 'Tokyo', 126000000, 'Prefecture', 2);
+
+
+INSERT INTO State (StateKey, StateName, EnglishStateName, StateType, StateCode, StateCapital, RegionName, RegionCode, CountryKey) VALUES
+(1, 'California', 'California', 'State', 'CA', 'Sacramento', 'Pacific', 'PAC', 1),
+(2, 'Texas', 'Texas', 'State', 'TX', 'Austin', 'South', 'SOU', 1),
+(3, 'Ontario', 'Ontario', 'Province', 'ON', 'Toronto', 'Central', 'CEN', 2),
+(4, 'Bavaria', 'Bavaria', 'State', 'BY', 'Munich', 'Southern', 'SOU', 4),
+(5, 'Tokyo', 'Tokyo', 'Prefecture', 'TY', 'Tokyo', 'Kanto', 'KAN', 5);
+
+
+
+INSERT INTO City (CityKey, CityName, StateKey, CountryKey) VALUES
+(1, 'Los Angeles', 1, 1),
+(2, 'Houston', 2, 1),
+(3, 'Toronto', 3, 2),
+(4, 'Munich', 4, 4),
+(5, 'Tokyo City', 5, 5);
+
+
+
+INSERT INTO Category (CategoryKey, CategoryName, Description) VALUES
+(1, 'Electronics', 'Devices and gadgets'),
+(2, 'Furniture', 'Home and office furniture'),
+(3, 'Clothing', 'Apparel and accessories'),
+(4, 'Food', 'Groceries and food items'),
+(5, 'Books', 'Educational and leisure reading material');
+
+
+
+INSERT INTO Supplier (SupplierKey, CompanyName, Address, PostalCode, CityKey) VALUES
+(1, 'ElectroHub', '123 Tech St', '90210', 1),
+(2, 'FurnishCo', '456 Design Ave', '77001', 2),
+(3, 'StyleMart', '789 Fashion Blvd', 'M5H 2N2', 3),
+(4, 'FoodieMarket', '101 Grocer Ln', '80331', 4),
+(5, 'ReadRight', '202 Book Way', '100-0001', 5);
+
+
+INSERT INTO Product (ProductKey, ProductName, QuantityPerUnit, UnitPrice, Discontinued, CategoryKey) VALUES
+(1, 'Smartphone', '1 unit', 699.99, 0, 1),
+(2, 'Dining Table', '1 unit', 299.99, 0, 2),
+(3, 'T-shirt', '1 unit', 19.99, 0, 3),
+(4, 'Organic Apples', '1 kg', 3.99, 0, 4),
+(5, 'Novel', '1 book', 15.99, 0, 5);
+
+
+INSERT INTO Customer (CustomerID, CompanyName, Address, PostalCode, CityKey) VALUES
+('CUST001', 'TechCorp', '789 Innovation Dr', '90001', 1),
+('CUST002', 'GreenGardens', '123 Nature St', '77002', 2),
+('CUST003', 'MapleInc', '456 Maple Rd', 'M5H 3A2', 3),
+('CUST004', 'BavarianBrew', '789 Beer Blvd', '80333', 4),
+('CUST005', 'TokyoTrends', '101 Fashion St', '100-0002', 5);
+
+
+INSERT INTO Employee (EmployeeKey, FirstName, LastName, Title, BirthDate, HireDate, Address, City, Region, PostalCode, Country, SupervisorKey) VALUES
+(1, 'Alice', 'Johnson', 'Manager', '1980-05-10', '2010-08-01', '321 Office Dr', 'Los Angeles', 'CA', '90001', 'USA', NULL),
+(2, 'Bob', 'Smith', 'Supervisor', '1985-03-20', '2012-06-15', '456 Main St', 'Houston', 'TX', '77001', 'USA', 1),
+(3, 'Carol', 'Taylor', 'Sales Rep', '1990-07-25', '2015-03-10', '789 Commerce Ave', 'Toronto', 'ON', 'M5H 2N2', 'Canada', 1),
+(4, 'David', 'Brown', 'Analyst', '1992-10-13', '2017-01-20', '102 City Center', 'Munich', 'Bavaria', '80331', 'Germany', 2),
+(5, 'Eve', 'Davis', 'Developer', '1987-11-30', '2018-09-15', '203 Innovation Park', 'Tokyo City', 'Tokyo', '100-0001', 'Japan', 3);
+
+
+INSERT INTO Time (TimeKey, Date, DayNbWeek, DayNameWeek, DayNbMonth, DayNbYear, WeekNbYear, MonthNumber, MonthName, Quarter, Semester, Year) VALUES
+(1, '2023-01-01', 1, 'Sunday', 1, 1, 1, 1, 'January', 1, 1, 2023),
+(2, '2023-01-02', 2, 'Monday', 2, 2, 1, 1, 'January', 1, 1, 2023),
+(3, '2023-01-03', 3, 'Tuesday', 3, 3, 1, 1, 'January', 1, 1, 2023),
+(4, '2023-01-04', 4, 'Wednesday', 4, 4, 1, 1, 'January', 1, 1, 2023),
+(5, '2023-01-05', 5, 'Thursday', 5, 5, 1, 1, 'January', 1, 1, 2023);
+
+
+INSERT INTO Shipper (ShipperKey, CompanyName) VALUES
+(1, 'FastShip'),
+(2, 'QuickDeliver'),
+(3, 'NextDay'),
+(4, 'SafeCourier'),
+(5, 'PriorityExpress');
+
+
+INSERT INTO Sales (
+    CustomerKey, EmployeeKey, OrderDateKey, DueDateKey, ShippedDateKey, ShipperKey, 
+    ProductKey, SupplierKey, OrderNo, OrderLineNo, UnitPrice, Quantity, Discount, 
+    SalesAmount, Freight
+) VALUES
+(1, 1, 1, 2, 3, 1, 1, 1, 1001, 1, 699.99, 2, 0.10, 1399.98, 15.00),
+(2, 2, 1, 2, 3, 2, 2, 2, 1002, 1, 299.99, 1, 0.05, 284.99, 10.00),
+(3, 3, 1, 2, 3, 3, 3, 3, 1003, 1, 19.99, 5, 0.00, 99.95, 5.00),
+(4, 4, 1, 2, 3, 4, 4, 4, 1004, 1, 3.99, 10, 0.02, 39.90, 2.00),
+(5, 5, 1, 2, 3, 5, 5, 5, 1005, 1, 15.99, 3, 0.00, 47.97, 1.50);
