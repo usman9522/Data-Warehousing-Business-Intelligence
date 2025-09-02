@@ -1,5 +1,10 @@
 # Data Warehousing & Business Intelligence Project
 
+![Python](https://img.shields.io/badge/Python-3.7+-blue?logo=python&logoColor=white)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-Database-red?logo=microsoft-sql-server&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-green?logo=pandas&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 A comprehensive educational project demonstrating the complete journey from traditional OLTP (Online Transaction Processing) database design to modern OLAP (Online Analytical Processing) data warehouse implementation for business intelligence analytics.
 
 ## 📖 Project Overview
@@ -23,16 +28,18 @@ This repository contains two distinct laboratory exercises that showcase the evo
 ```
 Data-Warehousing-Business-Intelligence/
 ├── LAB03/                          # OLTP Database Implementation
-│   ├── *.csv                       # Source data files
+│   ├── *.csv                       # Source data files (Categories, Products, Orders, etc.)
 │   ├── creatingtables.py           # Database schema creation
 │   ├── *Data.py                    # Data loading scripts
 │   ├── INDEXES.txt                 # Database indexing strategies
 │   └── hard.py                     # Advanced operations
 ├── lab5/                           # Data Warehouse Implementation
-│   ├── datawarehouse.py            # DW schema creation
+│   ├── datawarehouse.py            # DW schema creation (star schema)
 │   ├── LAB5_data.txt               # Sample data insertions
 │   └── QUERIES.txt                 # Business intelligence queries
-└── README.md                       # Project documentation
+├── README.md                       # Project documentation (this file)
+├── SETUP.md                        # Quick setup guide
+└── test_setup.py                   # Environment validation script
 ```
 
 ## 🔧 Technologies Used
@@ -66,6 +73,8 @@ pip install pyodbc pandas
 2. Configure SQL Server to allow trusted connections
 
 ## 🚀 Getting Started
+
+> **Quick Start**: See [SETUP.md](SETUP.md) for a step-by-step setup guide and [test_setup.py](test_setup.py) to validate your environment.
 
 ### LAB03: OLTP Database Implementation
 
@@ -189,6 +198,25 @@ erDiagram
 - **Geographic Analysis**: Analyze sales by region and territory
 - **Customer Segmentation**: Understand customer buying patterns
 
+### Sample Data Overview
+
+The project includes real-world business data:
+
+**Categories** (LAB03/Categories.csv):
+```
+CategoryID | CategoryName  | Description
+1          | Beverages     | Soft drinks, coffees, teas, beers, and ales
+2          | Condiments    | Sweet and savory sauces, relishes, spreads
+3          | Confections   | Desserts, candies, and sweet breads
+```
+
+**Products** (LAB03/Products.csv):
+```
+ProductID | ProductName | SupplierID | CategoryID | Unit              | Price
+1         | Chais       | 1          | 1          | 10 boxes x 20 bags| 18
+2         | Chang       | 1          | 1          | 24 - 12 oz bottles| 19
+```
+
 ### Sample Analytical Queries
 
 #### Year-over-Year Sales Comparison
@@ -234,7 +262,16 @@ conn = pyodbc.connect(
 )
 ```
 
-## 🧪 Testing
+## 🧪 Testing Your Setup
+
+### Quick Validation
+```bash
+# Test database connections
+python test_setup.py
+
+# Verify Python dependencies
+python -c "import pyodbc, pandas; print('Dependencies OK!')"
+```
 
 ### Data Validation
 1. Verify table creation and data loading
