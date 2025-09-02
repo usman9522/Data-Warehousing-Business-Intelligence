@@ -14,6 +14,8 @@ This repository contains two distinct laboratory exercises that showcase the evo
 - **LAB03**: Traditional OLTP Database Implementation (Northwind-style)
 - **lab5**: Data Warehouse & Business Intelligence Implementation
 
+> 📋 **See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed data flow diagrams and learning path visualization.**
+
 ## 🎯 Learning Objectives
 
 - Understand the differences between OLTP and OLAP systems
